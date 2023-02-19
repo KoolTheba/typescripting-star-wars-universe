@@ -11,14 +11,14 @@ type FilmDetailsTypes = {
   director: string;
   producer: string;
   release_date: string;
-}
+};
 
 type QueryTypes = {
   filmId: string;
   search: string;
-}
+};
 
-const FilmDetails:React.FC = () => {
+const FilmDetails: React.FC = () => {
   const router = useRouter();
   const query = router.query;
   const { filmId, search } = query as QueryTypes;

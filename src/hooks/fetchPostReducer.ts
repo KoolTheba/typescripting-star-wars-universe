@@ -2,11 +2,11 @@ import { Action } from "@/constants/types";
 
 type FilmDetailsState = {
   loading: boolean;
-  data: object | null,
-  error: string | null,
-}
+  data: object | null;
+  error: string | null;
+};
 
-function fetchPostReducer(state:FilmDetailsState, action: Action) {
+function fetchPostReducer(state: FilmDetailsState, action: Action) {
   if (action.type === "loading") {
     return {
       loading: true,

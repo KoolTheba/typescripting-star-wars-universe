@@ -9,14 +9,14 @@ type Film = {
   episode_id: string;
   title: string;
   release_date: string;
-}
+};
 
 type FilmListProps = {
   filmsList: Film[];
   searchContext: string;
-}
+};
 
-const FilmList:React.FC<FilmListProps> = ({ filmsList, searchContext }) => {
+const FilmList: React.FC<FilmListProps> = ({ filmsList, searchContext }) => {
   return (
     <>
       <div className={styles.cardsWrapper}>

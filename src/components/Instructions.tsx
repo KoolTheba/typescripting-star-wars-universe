@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "../styles/FilmSearch.module.css";
 
-const Instructions:React.FC = () => {
+const Instructions: React.FC = () => {
   return (
     <>
       <section className={styles.instructionsSection}>

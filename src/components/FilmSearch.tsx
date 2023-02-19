@@ -16,14 +16,14 @@ const initialState = {
   error: null,
 };
 
-const FilmSearch:React.FC = () => {
+const FilmSearch: React.FC = () => {
   const router = useRouter();
   const [state, dispatch] = useReducer(fetchPostReducer, initialState);
   const [searchValue, setSearchValue] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const searchValueRef = useCallback(() => {
-    if (router.query.search) {      
+    if (router.query.search) {
       setSearchValue(String(router.query.search));
       setIsSubmitted(true);
     }
@@ -38,7 +38,7 @@ const FilmSearch:React.FC = () => {
 
       Promise.all(searchValuesList.map((el) => searchByTerm(el, dispatch)))
         .then((arr) => {
-          return arr.reduce((p, c) => p.filter((e:any) => c.includes(e)));
+          return arr.reduce((p, c) => p.filter((e: any) => c.includes(e)));
         })
         .then((commomFilms) => {
           return Promise.all(
@@ -62,13 +62,13 @@ const FilmSearch:React.FC = () => {
     isSubmitted && fetchFilmList();
   }, [isSubmitted, searchValue]);
 
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 0) {
       setSearchValue(removeSpecialChars(e.target.value));
     }
   };
 
-  const handleSearch = (e:React.MouseEvent<HTMLButtonElement>) => {
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (searchValue.length > 0) {
       setIsSubmitted(true);
@@ -115,7 +115,10 @@ const FilmSearch:React.FC = () => {
         </span>
       )}
       {data && (
-        <FilmList filmsList={data} searchContext={String(router.query.search)} />
+        <FilmList
+          filmsList={data}
+          searchContext={String(router.query.search)}
+        />
       )}
     </>
   );

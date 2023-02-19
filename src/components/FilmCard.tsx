@@ -3,12 +3,7 @@ import Link from "next/link";
 import moment from "moment";
 
 import styles from "../styles/FilmCard.module.css";
-
-type FilmTypes = {
-  episode_id: string;
-  title: string;
-  release_date: string;
-};
+import { FilmTypes } from "@/constants/types";
 
 type FilmCardTypes = {
   film: FilmTypes;

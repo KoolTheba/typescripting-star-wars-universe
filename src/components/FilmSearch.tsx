@@ -13,7 +13,7 @@ import styles from "../styles/FilmSearch.module.css";
 const initialState = {
   loading: false,
   data: null,
-  error: null,
+  error: null
 };
 
 const FilmSearch: React.FC = () => {
@@ -34,26 +34,29 @@ const FilmSearch: React.FC = () => {
       searchValue.length > 0 ? removeSpaces(searchValue).split(" ") : [];
 
     const fetchFilmList = () => {
-      dispatch({ type: "loading" });
+      dispatch({ type: "loading", loading: true, data: null, error: null });
 
-      Promise.all(searchValuesList.map((el) => searchByTerm(el, dispatch)))
-        .then((arr) => {
-          return arr.reduce((p, c) => p.filter((e: any) => c.includes(e)));
+      Promise.all(searchValuesList.map(el => searchByTerm(el, dispatch)))
+        .then(arr => {
+          return arr.reduce((p, c) => p.filter(e => c.includes(e)));
         })
-        .then((commomFilms) => {
+        .then(commomFilms => {
           return Promise.all(
-            commomFilms.map((url: string) =>
-              fetch(url).then((res) => res.json())
-            )
+            commomFilms.map((url: string) => fetch(url).then(res => res.json()))
           );
         })
-        .then((data) => {
-          dispatch({ type: "fetchComplete", data });
+        .then(data => {
+          dispatch({
+            type: "fetchComplete",
+            data,
+            loading: false,
+            error: null
+          });
           setSearchValue("");
           setIsSubmitted(false);
         })
-        .catch((error) => {
-          dispatch({ type: "error", error });
+        .catch(error => {
+          dispatch({ type: "error", error, loading: false, data: null });
           setSearchValue("");
           setIsSubmitted(false);
         });
@@ -77,7 +80,7 @@ const FilmSearch: React.FC = () => {
       const parsedSearchValue = removeSpaces(parserNoChars);
       router.push({
         pathname: "/",
-        query: { search: parsedSearchValue },
+        query: { search: parsedSearchValue }
       });
     }
   };

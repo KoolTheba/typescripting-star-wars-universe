@@ -3,16 +3,11 @@ import React from "react";
 import FilmCard from "./FilmCard";
 import SearchDetails from "./SearchDetails";
 
+import { FilmTypes } from "../constants/types";
 import styles from "../styles/FilmList.module.css";
 
-type Film = {
-  episode_id: string;
-  title: string;
-  release_date: string;
-};
-
 type FilmListProps = {
-  filmsList: Film[];
+  filmsList: FilmTypes[];
   searchContext: string;
 };
 
@@ -25,7 +20,7 @@ const FilmList: React.FC<FilmListProps> = ({ filmsList, searchContext }) => {
           <SearchDetails list={searchContext} />
         </div>
         <ul className={styles.cardsList}>
-          {filmsList.map((film) => (
+          {filmsList.map(film => (
             <li key={film.episode_id} className={styles.cardItem}>
               <FilmCard film={film} searchContext={searchContext} />
             </li>

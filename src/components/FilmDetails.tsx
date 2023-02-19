@@ -31,11 +31,11 @@ const FilmDetails: React.FC = () => {
       const filmUrl = `https://swapi.dev/api/films/${parseInt(filmId)}`;
 
       fetch(filmUrl)
-        .then((res) => res.json())
-        .then((data) =>
+        .then(res => res.json())
+        .then(data =>
           data.detail ? setError(data.detail) : setFilmDetails(data)
         )
-        .catch((err) => setError(err));
+        .catch(err => setError(err));
     }
   }, [filmId]);
 
@@ -64,7 +64,7 @@ const FilmDetails: React.FC = () => {
             onClick={() => {
               router.push({
                 pathname: "/",
-                query: { search },
+                query: { search }
               });
             }}
           >
